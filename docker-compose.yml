@@ -1,0 +1,32 @@
+version: "3.8"  # Versão do docker-compose
+
+services:       # Lista dos serviços que vão rodar
+
+  db: # Serviço do banco de dados
+    image: postgres:15  # Usa o PostgreSQL versão 15
+    container_name: postgres-db-gerenciador-tarefas  # Nome do container do banco
+    environment: # Configura o banco com usuário, senha e nome do banco
+      POSTGRES_DB: gerenciador_tarefas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"  # Liga a porta 5432 do container com a do computador
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Salva os dados para não perder quando parar o container
+#
+#  backend:      # Serviço da aplicação backend
+#    build: ./back-end/algamoney-api  # Pasta onde está o Dockerfile para construir a aplicação
+#    container_name: algamoney-api    # Nome do container do backend
+#    depends_on:
+#      - db  # Só inicia o backend depois que o banco estiver pronto
+#    ports:
+#      - "8080:8080"  # Liga a porta 8080 do container com a do computador
+#    environment:  # Passa as informações para o backend se conectar ao banco
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/algamoneyApi
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: postgres
+
+
+
+volumes:
+  pgdata:  # Volume para guardar os dados do banco de forma permanente
