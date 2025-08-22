@@ -1,12 +1,10 @@
 package com.lucas.org.gerenciador_de_tarefas.config;
 
 import com.lucas.org.gerenciador_de_tarefas.config.auth.JwtAuthFilter;
-import com.lucas.org.gerenciador_de_tarefas.enums.Role;
+import com.lucas.org.gerenciador_de_tarefas.enums.Roles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,8 +25,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.name())
-                        .requestMatchers("/funcionario/**").hasAnyAuthority(Role.FUNCIONARIO.name())
+                        .requestMatchers("/admin/**").hasAnyAuthority(Roles.ADMIN.name())
+                        .requestMatchers("/funcionario/**").hasAnyAuthority(Roles.FUNCIONARIO.name())
                         .anyRequest()
                         .authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

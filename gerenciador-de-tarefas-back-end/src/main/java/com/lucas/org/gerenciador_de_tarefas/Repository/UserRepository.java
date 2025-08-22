@@ -1,13 +1,16 @@
 package com.lucas.org.gerenciador_de_tarefas.Repository;
 
-import com.lucas.org.gerenciador_de_tarefas.Entity.User;
+import com.lucas.org.gerenciador_de_tarefas.Entity.Users;
+import com.lucas.org.gerenciador_de_tarefas.enums.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-   Optional<User> findByEmail(String email);
+public interface UserRepository extends JpaRepository<Users, Long> {
+   Optional<Users> findByEmail(String email);
+
+
+    Optional<Users> findByRoles(Roles roles);
 }

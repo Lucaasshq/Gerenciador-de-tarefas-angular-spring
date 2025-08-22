@@ -1,6 +1,6 @@
 package com.lucas.org.gerenciador_de_tarefas.Entity;
 
-import com.lucas.org.gerenciador_de_tarefas.enums.Role;
+import com.lucas.org.gerenciador_de_tarefas.enums.Roles;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,24 +11,25 @@ import java.util.List;
 
 @Data
 @Entity
-public class User implements UserDetails {
+
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String username;
 
     private String email;
 
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Roles roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(role);
+        return List.of(roles);
     }
 
     @Override
