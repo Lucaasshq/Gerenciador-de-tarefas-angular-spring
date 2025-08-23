@@ -28,7 +28,7 @@ public class JwtUtils {
     public static final long EXPIRE_DAYS = 0;
     public static final long EXPIRE_HOURS = 0;
     public static final long EXPIRE_MINUTES = 5;
-    public static final long EXPIRERATION_REFRESH_TOKEN_DAYS = 7;
+    public static final long EXPIRATION_REFRESH_TOKEN_DAYS = 7;
     public static final String JWT_AUTHORIZATION = "Authorization";
     public static final String JWT_BEARER = "Bearer ";
 
@@ -82,5 +82,4 @@ public class JwtUtils {
             return false;
         }
     }
-
 }

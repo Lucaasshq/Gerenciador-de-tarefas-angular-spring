@@ -1,5 +1,6 @@
 package com.lucas.org.gerenciador_de_tarefas.Entity;
 
+import com.lucas.org.gerenciador_de_tarefas.DTO.UserDto;
 import com.lucas.org.gerenciador_de_tarefas.enums.Roles;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -30,6 +31,15 @@ public class Users implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(roles);
+    }
+
+    public UserDto getUserDto(){
+        UserDto userDto = new UserDto();
+        userDto.setId(id);
+        userDto.setUsername(username);
+        userDto.setEmail(email);
+        userDto.setRoles(roles);
+        return userDto;
     }
 
     @Override

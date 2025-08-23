@@ -6,12 +6,12 @@ import org.springframework.security.core.GrantedAuthority;
 public enum Roles implements GrantedAuthority {
     ADMIN("ADMIN"), FUNCIONARIO("FUNCIONARIO");
 
-    private String authority;
+    private final String authority;
 
     Roles(String authority){ this.authority = authority; }
 
     @Override
     public String getAuthority() {
-        return "";
+        return "ROLE_"+authority;
     }
 }

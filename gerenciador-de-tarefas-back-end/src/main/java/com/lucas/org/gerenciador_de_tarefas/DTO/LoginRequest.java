@@ -3,10 +3,7 @@ package com.lucas.org.gerenciador_de_tarefas.DTO;
 import lombok.Data;
 
 @Data
-public class SignupRequest {
-
-    private String username;
-
+public class LoginRequest {
     private String email;
 
     private String password;
