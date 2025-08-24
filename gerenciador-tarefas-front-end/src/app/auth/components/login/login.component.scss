@@ -1,0 +1,40 @@
+.container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100vh;
+}
+
+
+.form-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.form-card{
+    max-width: 400px;
+    width: 100%;
+    padding: 28px;
+}
+
+
+mat-card-title{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+mat-form-field{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+button{
+    width: 100%;
+    border-radius: 5px;
+}
+
