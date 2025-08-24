@@ -1,6 +1,6 @@
 package com.lucas.org.gerenciador_de_tarefas.controller;
 
-import com.lucas.org.gerenciador_de_tarefas.DTO.AuthenticationResponse;
+import com.lucas.org.gerenciador_de_tarefas.DTO.LoginResponse;
 import com.lucas.org.gerenciador_de_tarefas.DTO.LoginRequest;
 import com.lucas.org.gerenciador_de_tarefas.DTO.SignupRequest;
 import com.lucas.org.gerenciador_de_tarefas.DTO.UserDto;
@@ -8,9 +8,7 @@ import com.lucas.org.gerenciador_de_tarefas.Entity.Users;
 import com.lucas.org.gerenciador_de_tarefas.JWT.JwtUtils;
 import com.lucas.org.gerenciador_de_tarefas.Repository.UserRepository;
 import com.lucas.org.gerenciador_de_tarefas.service.auth.AuthService;
-import com.lucas.org.gerenciador_de_tarefas.service.auth.AuthServiceimpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,10 +16,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Date;
@@ -30,6 +25,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AuthController {
 
 
@@ -56,7 +52,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest){
+    public LoginResponse login(@RequestBody LoginRequest loginRequest){
         try {
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -69,12 +65,12 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
         Optional<Users> user = userRepository.findFirstByEmail(loginRequest.getEmail());
         final String jwtToken = jwtUtils.gerarToken(userDetails, jwtUtils.EXPIRATION_TOKEN(Date.from(Instant.now())), loginRequest.getEmail());
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        LoginResponse loginResponse = new LoginResponse();
         if (user.isPresent()){
-            authenticationResponse.setJwt(jwtToken);
-            authenticationResponse.setUserId(user.get().getId());
-            authenticationResponse.setRole(user.get().getRoles());
+            loginResponse.setJwt(jwtToken);
+            loginResponse.setUserId(user.get().getId());
+            loginResponse.setRole(user.get().getRoles());
         }
-        return authenticationResponse;
+        return loginResponse;
     }
 }

@@ -30,9 +30,11 @@
 
 
                 <button mat-flat-button type="submit" [disabled]="loginForm.invalid"
-                        (click)="enviarAgora()">Login</button>
+                        (click)="login()">Login</button>
 
-
+                <mat-card-actions>
+                    <button routerLink="/signup" class="button-nao-conta" mat-button>Não tenho conta </button>
+                </mat-card-actions>
 
             </form>
         </mat-card-content>

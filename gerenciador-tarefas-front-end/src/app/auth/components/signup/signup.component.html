@@ -7,7 +7,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Nome</mat-label>
-                    <input matInput formControlName="nome" placeholder="nome" required>
+                    <input matInput formControlName="username" placeholder="nome" required>
 
                     <mat-error *ngIf="signupForm.get('nome')?.invalid && signupForm.get('nome')?.touched">
                         Por favor entre com nome valido.
@@ -53,7 +53,7 @@
                 </mat-form-field>
 
                 <button mat-flat-button type="submit" [disabled]="signupForm.invalid"
-                        (click)="enviarAgora()">Registre-se</button>
+                        (click)="signup()">Registre-se</button>
             </form>
         </mat-card-content>
     </mat-card>

@@ -4,7 +4,7 @@ import com.lucas.org.gerenciador_de_tarefas.enums.Roles;
 import lombok.Data;
 
 @Data
-public class AuthenticationResponse {
+public class LoginResponse {
 
     private String jwt;
 
