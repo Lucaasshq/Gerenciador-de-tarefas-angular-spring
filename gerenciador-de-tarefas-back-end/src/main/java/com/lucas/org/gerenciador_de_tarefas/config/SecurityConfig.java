@@ -4,7 +4,9 @@ import com.lucas.org.gerenciador_de_tarefas.config.auth.JwtAuthFilter;
 import com.lucas.org.gerenciador_de_tarefas.enums.Roles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain (HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/admin/**").hasAnyAuthority(Roles.ADMIN.name())
                         .requestMatchers("/funcionario/**").hasAnyAuthority(Roles.FUNCIONARIO.name())
@@ -32,8 +35,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-
-
     }
 
 
@@ -50,4 +51,6 @@ public class SecurityConfig {
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
         return builder.build();
     }
+
+
 }

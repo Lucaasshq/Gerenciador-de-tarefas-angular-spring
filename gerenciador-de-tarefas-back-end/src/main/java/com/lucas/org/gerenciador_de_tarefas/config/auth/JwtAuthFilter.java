@@ -30,6 +30,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+
+
         String header = request.getHeader(JwtUtils.JWT_AUTHORIZATION);
         if (header == null || !header.startsWith(JwtUtils.JWT_BEARER)) {
             logger.info("JWT Token nulo, vazio ou não iniciando com 'Bearer '.");

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,7 +22,7 @@ public class AuthServiceimpl implements AuthService {
     // Cria uma conta como administrador caso ainda não exista
     @PostConstruct
     public void createAnAdminAccount(){
-        Optional<Users> optionalUseruser = userRepository.findByRoles(Roles.ADMIN);
+        Optional<List<Users>> optionalUseruser = userRepository.findByRoles(Roles.ADMIN);
         if (optionalUseruser.isEmpty()){
             Users usersAdmin = new Users();
             usersAdmin.setEmail("admin@test.com");

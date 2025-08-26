@@ -2,6 +2,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/components/login/login.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
+import { PostTaskComponent } from './admin/components/post-task/post-task.component';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
@@ -13,4 +14,5 @@ export const routes: Routes = [
     {path: "funcionario/dashboard", loadComponent: ()=> 
         import("./funcionario/components/dashboard/dashboard.component").then(m => m.DashboardComponent)
     },
+    {path: "admin/criar-tarefa", component: PostTaskComponent}
 ];

@@ -20,7 +20,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   mostrarSenha: boolean = true;;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private snackbar: MatSnackBar , private router:Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private snackbar: MatSnackBar, private router: Router) {
     this.loginForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]]
@@ -33,24 +33,24 @@ export class LoginComponent {
 
   login(): void {
     this.authService.login(this.loginForm.value).subscribe({
-      next: (res: LoginResponse)=> {
+      next: (res: LoginResponse) => {
         const user = {
           id: res.userId,
           role: res.role
         }
         StorageService.salvarUser(user);
         StorageService.salvarToken(res.jwt)
-        if (StorageService.eAdminLogado()){
+        if (StorageService.eAdminLogado()) {
           this.router.navigateByUrl("/admin")
-        } else if(StorageService.eFuncionarioLogado()){
+        } else if (StorageService.eFuncionarioLogado()) {
           this.router.navigateByUrl("/funcionario")
-          this.snackbar.open("Login efetuado com sucesso", "Close", {duration: 5000})
+          this.snackbar.open("Login efetuado com sucesso", "Close", { duration: 5000 })
         }
-        
-     
+
+
       },
       error: (err: HttpErrorResponse) => {
-        this.snackbar.open("Erro ao tentar fazer Login", "Close", {duration: 5000, panelClass:"error-snackbar"})
+        this.snackbar.open("Erro ao tentar fazer Login", "Close", { duration: 5000, panelClass: "error-snackbar" })
         console.error("Error ao tentar fazer Login", err)
       }
     })
