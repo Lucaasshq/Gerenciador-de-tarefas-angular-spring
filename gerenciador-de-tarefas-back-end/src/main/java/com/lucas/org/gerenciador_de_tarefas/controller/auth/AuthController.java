@@ -1,4 +1,4 @@
-package com.lucas.org.gerenciador_de_tarefas.controller;
+package com.lucas.org.gerenciador_de_tarefas.controller.auth;
 
 import com.lucas.org.gerenciador_de_tarefas.DTO.LoginResponse;
 import com.lucas.org.gerenciador_de_tarefas.DTO.LoginRequest;

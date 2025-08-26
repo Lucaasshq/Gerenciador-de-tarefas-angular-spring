@@ -1,16 +1,38 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatButtonModule} from '@angular/material/button';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MaterialModule } from './MaterialModule';
+import { StorageService } from './auth/services/storage/storage.service';
+import { CommonModule } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MaterialModule, RouterLink],
+  imports: [RouterOutlet, MaterialModule, RouterLink, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'gerenciador-tarefas';
+export class AppComponent implements OnInit {
+
+
+  isFuncionarioLogado: boolean = StorageService.eFuncionarioLogado();
+  isAdminLogado: boolean = StorageService.eAdminLogado();
+
+  constructor(private router: Router) { }
+
+
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      this.isFuncionarioLogado = StorageService.eFuncionarioLogado();
+      this.isAdminLogado = StorageService.eAdminLogado();
+    })
+  }
+
+  logout() {
+    StorageService.logout()
+    this.router.navigateByUrl("/login")
+  }
+
+
+
 }

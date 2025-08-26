@@ -7,10 +7,10 @@ export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
     {path: "login", component: LoginComponent},
     {path: "signup", component: SignupComponent},
-    {path: "admin", loadComponent: ()=> 
+    {path: "admin/dashboard", loadComponent: ()=> 
         import("./admin/components/dashboard/dashboard.component").then(m => m.DashboardComponent)
     },
-    {path: "funcionario", loadComponent: ()=> 
+    {path: "funcionario/dashboard", loadComponent: ()=> 
         import("./funcionario/components/dashboard/dashboard.component").then(m => m.DashboardComponent)
     },
 ];

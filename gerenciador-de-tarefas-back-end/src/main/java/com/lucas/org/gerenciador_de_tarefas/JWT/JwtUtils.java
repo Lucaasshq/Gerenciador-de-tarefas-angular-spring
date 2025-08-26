@@ -38,7 +38,7 @@ public class JwtUtils {
 
 
 
-    public String gerarToken(UserDetails userDetails, Date expiration, String username) {
+    public String gerarToken(UserDetails userDetails, Date expiration, String email) {
         List<String> roles = userDetails.getAuthorities()
                 .stream()
                 .map(grantedAuthority -> grantedAuthority.getAuthority())
@@ -48,7 +48,7 @@ public class JwtUtils {
 
         return builder()
                 .setSubject(userDetails.getUsername())
-                .claim("username", username)
+                .claim("email", email)
                 .claim("roles", roles)
                 .setExpiration(limit)
                 .signWith(KEY)
@@ -61,7 +61,7 @@ public class JwtUtils {
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
-                .getSubject();
+                .get("email", String.class);
     }
 
 

@@ -1,9 +1,28 @@
-<div>
+<div *ngIf="!isAdminLogado && !isFuncionarioLogado">
     <mat-toolbar class="nav-bar">
   <span >Gerenciador de Tarefas</span>
   <span class="espaco"></span>
   <button mat-button routerLink="/signup">Registre-se</button>
   <button mat-button routerLink="/login">Login</button>
+</mat-toolbar>
+</div>
+
+
+<div *ngIf="isAdminLogado">
+    <mat-toolbar class="nav-bar">
+  <span >Admin</span>
+  <span class="espaco"></span>
+  <button mat-button routerLink="/admin/dashboard">Dashboard</button>
+  <button mat-button  (click)="logout()" >Logout</button>
+</mat-toolbar>
+</div>
+
+<div *ngIf="isFuncionarioLogado">
+    <mat-toolbar class="nav-bar">
+  <span>Funcionario</span>
+  <span class="espaco"></span>
+  <button mat-button routerLink="/funcionario/dashboard">Dashboard</button>
+  <button mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
 </div>
 
