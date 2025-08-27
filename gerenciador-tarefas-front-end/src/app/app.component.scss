@@ -1,7 +1,9 @@
 
 .nav-bar{
+  position: fixed;
     display: flex;
     font-weight: 500;
+    z-index: 1000;
 }
 
 .espaco{
