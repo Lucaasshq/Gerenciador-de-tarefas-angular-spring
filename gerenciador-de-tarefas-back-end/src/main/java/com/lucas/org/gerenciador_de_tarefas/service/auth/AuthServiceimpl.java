@@ -22,8 +22,8 @@ public class AuthServiceimpl implements AuthService {
     // Cria uma conta como administrador caso ainda não exista
     @PostConstruct
     public void createAnAdminAccount(){
-        Optional<List<Users>> optionalUseruser = userRepository.findByRoles(Roles.ADMIN);
-        if (optionalUseruser.isEmpty()){
+        Optional<Users> admin = userRepository.findByEmail("admin@test.com");
+        if (admin.isEmpty()) {
             Users usersAdmin = new Users();
             usersAdmin.setEmail("admin@test.com");
             usersAdmin.setUsername("admin");
@@ -32,7 +32,7 @@ public class AuthServiceimpl implements AuthService {
             userRepository.save(usersAdmin);
             System.out.println("Conta de administrador criada");
         } else {
-            System.out.println("Já existe uma conta de administrador.");
+            System.out.println("Já existe uma conta de administrador");
         }
     }
 

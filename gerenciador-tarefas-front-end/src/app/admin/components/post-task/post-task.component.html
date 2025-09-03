@@ -14,7 +14,7 @@
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Descrição</mat-label>
-      <textarea matInput type="text" placeholder="Descrição" formControlName="description" ></textarea>
+      <textarea matInput type="text" placeholder="Descrição" formControlName="description"></textarea>
       <mat-error *ngIf="tarefaForm.get('description')?.hasError('required')">
         este campo é requerido.
       </mat-error>
@@ -56,6 +56,6 @@
     </mat-form-field>
 
     <button mat-flat-button class="button-submit-task" type="submit" (click)="postTask()">Criar
-      </button>
+    </button>
   </form>
 </div>

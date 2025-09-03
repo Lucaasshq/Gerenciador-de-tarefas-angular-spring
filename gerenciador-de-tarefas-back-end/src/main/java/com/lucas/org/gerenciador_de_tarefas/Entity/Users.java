@@ -42,11 +42,6 @@ public class Users implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return "";
-    }
-
-    @Override
     public boolean isAccountNonExpired() {
         return UserDetails.super.isAccountNonExpired();
     }
